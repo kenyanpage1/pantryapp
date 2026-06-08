@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('countable')->default(false);
             $table->unsignedInteger('quantity')->nullable();
             $table->unsignedInteger('original_quantity')->nullable();
-            $table->decimal('price', 8, 2)->nullable();
+            $table->decimal('price', 8, 2)->default(0.00);
             $table->date('expiration_date')->nullable();
             $table->boolean('refrigerated')->default(false);
             $table->foreignId('pantry_id')->constrained()->cascadeOnDelete();
