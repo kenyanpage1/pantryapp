@@ -14,10 +14,12 @@ class PantryController extends Controller
      */
     public function index()
     {
-        $pantry = Pantry::get();
-        $item = Item::get();
+        $pantries = Pantry::get();
+        $item = Item::orderBy('created_at','ASC')->get();
+        //ADDING THIS HERE FOR LATER IF I WANT TO USE IT
+        //$item = Item::orderBy('created_at','ASC')->paginate(1);
         return view('dashboard', [
-            'pantries' => $pantry,
+            'pantries' => $pantries,
             'items' => $item]);
     }
 
@@ -26,7 +28,13 @@ class PantryController extends Controller
      */
     public function create()
     {
-        //
+        $pantries = Pantry::get();
+        $item = Item::orderBy('created_at','ASC')->get();
+        //ADDING THIS HERE FOR LATER IF I WANT TO USE IT
+        //$item = Item::orderBy('created_at','ASC')->paginate(1);
+        return view('pantry', [
+            'pantries' => $pantries,
+            'items' => $item]);
     }
 
     /**
