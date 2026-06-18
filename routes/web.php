@@ -8,11 +8,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [PantryController::class, 'index'])
-->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/pantry', [PantryController::class, 'create'])
-    ->middleware(['auth', 'verified'])->name('pantry');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [PantryController::class, 'index'])
+        ->name('dashboard');
+
+    Route::get('/pantry/create', [PantryController::class, 'create'])
+        ->name('pantry.create');
+
+    Route::post('/pantry/create', [PantryController::class, 'store'])
+        ->name('pantry.store');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Pantry;
 use App\Http\Controllers\Controller;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PantryController extends Controller
 {
@@ -28,13 +30,14 @@ class PantryController extends Controller
      */
     public function create()
     {
-        $pantries = Pantry::get();
-        $item = Item::orderBy('created_at','ASC')->get();
-        //ADDING THIS HERE FOR LATER IF I WANT TO USE IT
-        //$item = Item::orderBy('created_at','ASC')->paginate(1);
-        return view('pantry', [
-            'pantries' => $pantries,
-            'items' => $item]);
+        return view('pantry.create');
+//        $pantries = Pantry::get();
+//        $item = Item::orderBy('created_at','ASC')->get();
+//        //ADDING THIS HERE FOR LATER IF I WANT TO USE IT
+//        //$item = Item::orderBy('created_at','ASC')->paginate(1);
+//        return view('pantry', [
+//            'pantries' => $pantries,
+//            'items' => $item]);
     }
 
     /**
@@ -42,7 +45,9 @@ class PantryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
     }
 
     /**
